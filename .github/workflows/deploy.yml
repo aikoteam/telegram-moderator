@@ -16,11 +16,14 @@ jobs:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
-      - name: Deploy on Fly
+      - name: Set secrets
         run: |
-          flyctl deploy --remote-only \
-            --set-secret TELEGRAM_BOT_TOKEN="${{ secrets.TELEGRAM_BOT_TOKEN }}" \
-            --set-secret TELEGRAM_ADMIN_CHAT_ID="${{ secrets.TELEGRAM_ADMIN_CHAT_ID }}" \
-            --set-secret TELEGRAM_MODERATOR_CHAT_ID="${{ secrets.TELEGRAM_MODERATOR_CHAT_ID }}" \
-            --set-secret RULES_URL="${{ secrets.RULES_URL }}" \
-            --set-secret BANNED_WORDS="${{ secrets.BANNED_WORDS }}"
+          flyctl secrets set --app telegram-moderator \
+            TELEGRAM_BOT_TOKEN="${{ secrets.TELEGRAM_BOT_TOKEN }}" \
+            TELEGRAM_ADMIN_CHAT_ID="${{ secrets.TELEGRAM_ADMIN_CHAT_ID }}" \
+            TELEGRAM_MODERATOR_CHAT_ID="${{ secrets.TELEGRAM_MODERATOR_CHAT_ID }}" \
+            RULES_URL="${{ secrets.RULES_URL }}" \
+            BANNED_WORDS="${{ secrets.BANNED_WORDS }}"
+
+      - name: Deploy to Fly.io
+        run: flyctl deploy --app telegram-moderator --remote-only
