@@ -6,6 +6,7 @@ ENV PYTHONUNBUFFERED 1
 
 # Встановлюємо робочу директорію всередині контейнера
 WORKDIR /app
+# Зміна для скидання кешу v1
 
 # Копіюємо файл з залежностями
 COPY requirements.txt .
