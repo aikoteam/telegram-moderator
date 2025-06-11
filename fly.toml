@@ -1,10 +1,20 @@
 # fly.toml app configuration file for telegram-moderator
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+# This configuration ensures the app runs continuously.
 
 app = "telegram-moderator"
-primary_region = "ams" # Ваш регіон, можна залишити як є
+primary_region = "ams"
 
-# Вказуємо Fly.io, що це не веб-сервер, а постійний процес.
-# Він буде запущений командою "python bot.py".
+# Вказуємо, яку команду запускати
 [processes]
   app = "python bot.py"
+
+# Цей блок - це "трюк", який змушує машину працювати постійно.
+# Він описує фальшивий сервіс, що дозволяє нам керувати авто-зупинкою.
+[[services]]
+  internal_port = 8080 # Цей порт не має значення, він просто має бути
+  processes = ["app"]
+  protocol = "tcp"
+
+  # Ці два рядки - найголовніші. Вони забороняють машині "засинати".
+  auto_stop_machines = false
+  min_machines_running = 1
