@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 import os
 
 # Localhost url: postgresql://localhost/postgres
-postgres_url = os.environ["TELEGRAM_BOT_POSTGRES_URL"]
+postgres_url = os.environ["DATABASE_URL"]
 
 
 '''
