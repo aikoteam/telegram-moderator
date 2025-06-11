@@ -1,5 +1,5 @@
 # Використовуємо офіційний, легкий образ Python
-FROM python:3.10-slim
+FROM python:3.8-slim
 
 # Встановлюємо ENV змінні, щоб Python виводив все одразу в лог
 ENV PYTHONUNBUFFERED 1
