@@ -349,6 +349,7 @@ class TelegramMonitorBot:
 
         # Remove accents from letters (é->e, ñ->n, etc...)
         message = unidecode.unidecode(update.message.text)
+        print(f"DEBUG: Checking transliterated message: '{message}'")
         # TODO: Replace lookalike unicode characters:
         # https://github.com/wanderingstan/Confusables
 
